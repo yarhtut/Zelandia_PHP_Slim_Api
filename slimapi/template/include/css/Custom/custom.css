@@ -107,3 +107,18 @@ a{
     color:#222;
     padding-left:40px;
 }
+.plantListView{
+    border:1px solid black !important;
+    background:red;
+
+}
+.birdListView{
+    border:1px solid black !important;
+    background:green;
+
+}
+.insectListView{
+    border:1px solid black !important;
+    background:rgba(255,00,255,0.2);
+
+}

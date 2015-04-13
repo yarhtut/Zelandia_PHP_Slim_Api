@@ -121,7 +121,7 @@ if (isset($_SESSION['logged_in']) == true) {
 
 
             <div class="tab_content_members">
-                     <div class="birdListView " style="display:none">
+                     <div class="birdListView " style="display:none;">
                            <ul  class="nav list_template" id="template_members">
                                 <li class="col-lg-2" id="members_id" ></li>
                                 <li class="col-lg-3" id="username"></li>
@@ -157,7 +157,7 @@ if (isset($_SESSION['logged_in']) == true) {
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
                                         <h4 class="modal-title">List View Update Insert Delete</h4>
                                     </div>
                                     <div class="modal-body">
@@ -208,7 +208,7 @@ if (isset($_SESSION['logged_in']) == true) {
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
                                         <h4 class="modal-title">Members Update Insert Delete</h4>
                                     </div>
                                     <div class="modal-body">
@@ -546,9 +546,8 @@ if (isset($_SESSION['logged_in']) == true) {
                 if (response.success == true){
                     var cat = response.data;
                     // console.log("cat",response.data)
-                    debug_object = cat;
-                    $.each(cat, function(index,items){
 
+                    $.each(cat, function(index,items){
                         var element_name = "list_id_"+items.list_id;
                         //console.log("items",items);
 
@@ -565,6 +564,7 @@ if (isset($_SESSION['logged_in']) == true) {
 
 
                         // database value 1 to name if name is 1 then checked true
+
                         $(".active", clone_template).attr('name',+ items.list_active);
                         console.log("items.list_active",items.list_active)
                         var isActive = (items.list_active == 1) ? true : false;
@@ -574,7 +574,6 @@ if (isset($_SESSION['logged_in']) == true) {
                         if (isActive == true)
                             $(".active_checkbox", clone_template).attr('checked' , true);
                         //element_name
-
 
 
                         //value for check or not check id parse
@@ -626,7 +625,7 @@ if (isset($_SESSION['logged_in']) == true) {
                 //  console.log("response",response)
             }
         });
-//-------------------------------------------------get json object and set into clone template button
+//-------------------------------------------------get json object and set into clone template button-----------------
         var type = '0';
         $.ajax({
             url : 'api/members/'+type,

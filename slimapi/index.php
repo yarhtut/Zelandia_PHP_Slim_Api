@@ -61,7 +61,17 @@ $app->get('/education', function () use($app) {
 
 
 });
+// render the Sanctuary php page
+$app->get('/Sanctuary', function () use($app) {
 
+    $app->render('include/top-menu.php');
+    $app->render('include/top_navbar.php');
+    $app->render('include/script.php');
+    //render main home page
+    $app->render('Sanctuary.php');
+
+
+});
 
 
 //Admin logon Page
@@ -480,7 +490,7 @@ $app->group('/admin', function () use ($db,$app) {
 
 $app->hook('slim.before.router', function () use ($app) {
     $app->view()->appendData(array('baseUrl' => 'template/include'));
-    $app->view()->appendData(array('imagePath' => 'template/include/images/'));
+    $app->view()->appendData(array('imagePath' => 'images/'));
     $app->view()->appendData(array('soundPath' => 'template/include/sound/'));
 });
 

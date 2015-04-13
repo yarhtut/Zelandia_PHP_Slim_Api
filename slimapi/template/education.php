@@ -111,7 +111,7 @@
                             $("#cat", clone_template).text(items.list_cat);
                             $("#name", clone_template).text(items.list_name);
                             $("#points", clone_template).text(items.list_points);
-                            $("#img_education", clone_template).attr('src',"template/include/images/" +items.list_img);
+                            $("#img_education", clone_template).attr('src',$imagePath +items.list_img);
                             $("#sound", clone_template).attr('src',items.list_sound);
                             $("#description", clone_template).text(items.list_desc);
                            // console.log("clone_template",clone_template.html());

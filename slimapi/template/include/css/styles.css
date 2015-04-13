@@ -85,3 +85,8 @@ button {
 #searchKey {
 	width:160px;
 }
+.sanctuary_view{
+    border:1px solid black !important;
+    background:red;
+
+}
