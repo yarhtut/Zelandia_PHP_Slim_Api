@@ -1,0 +1,109 @@
+/*@import url(http://fonts.googleapis.com/css?family=Roboto:100,300,400);*/
+@import url('login.css');
+@import url('education.css');
+
+html,body{
+    background:white;
+    font-weight:100 !important;
+    color:#000;
+    font: 400 15px/1 Roboto, Helvetica, Arial, sans-serif;
+}
+
+.top-menu{
+    background:rgba(18,18,18,1);
+    border-radius:0px !important;
+    margin:0px !important;
+    padding:0px !important;
+    min-height:27px !important;
+    border:1px solid #000;
+}
+a{
+    color:#efefef;
+    cursor:hand;
+}
+.nav-login{
+    margin:0px !important;
+    padding:0px !important;
+
+}
+.ul-login{
+    margin:0px !important;
+    padding:0px !important;
+    height:27px !important;
+}
+
+.navbar-brand{
+    font-size:32px;
+    padding-top:15px;
+    color:#Ed6726 !important;
+}
+.navbar-brand > p{
+    font-size:18px;
+    padding-top:5px;
+    margin-left:10px;
+    color:#efefef !important;
+}
+.main-menu-ul li{
+    font-size:16px;
+    padding-top:3px;
+    padding-bottom:4px;
+}
+.main-menu-ul{
+     height:auto;
+
+ }
+.main-menu-ul .fa{
+   font-size:22px;
+   margin-top:-5px;
+    color:#5d5d5d !important;
+}
+.navbar-toggle{
+    border:1px solid #444;
+}
+.navbar-toggle span{
+    background:#Ed6726 !important;
+}
+.login{
+    border-left:1px solid #454545;
+    border-right:1px solid #454545;
+    padding:0px 15px 5px 15px;
+}
+.member{
+    border-left:1px solid #454545;
+    border-right:1px solid #454545;
+    padding:0px 15px 5px 15px;
+}
+.main-menu{
+    background:rgba(34,34,34,1);
+}
+.summary img{
+    height:270px;
+}
+.dropdwon2{
+    backgound:#232323;
+}
+.birdList{
+    border:1px solid #222;
+
+}
+.birdList li{
+    border:1px solid #232323;
+    border-radius:4px;
+     color:#111;
+
+}
+.mainArea-mid li{
+    margin:0px auto;
+    margin-left:10%;
+}
+.mainArea-mid li>label{
+   padding-right:40px;
+}
+.mainArea-mid li>input{
+     color:#222;
+     padding-left:40px;
+ }
+.leftArea li>a{
+    color:#222;
+    padding-left:40px;
+}
