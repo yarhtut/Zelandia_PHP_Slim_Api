@@ -50,7 +50,7 @@ if (isset($_SESSION['logged_in']) == true) {
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">School Activities<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a data-toggle="tab" href="#dropdown1">Activities 1</a></li>
+                    <li><a data-toggle="tab" href="#upload_image">Activities 1</a></li>
                     <li><a data-toggle="tab" href="#dropdown2">Activities 2</a></li>
                 </ul>
             </li>
@@ -58,15 +58,14 @@ if (isset($_SESSION['logged_in']) == true) {
     </div>
     <!----------------------------------admin right-------------------------->
     <div class="col-lg-9 col-md-9 main_admin_right ">
-
-        <div id="admin_panel" class="fade admin_panel ">
+    <!--------------------------------------------list Panel--------------------------------------------->
+            <div id="admin_panel" class="fade admin_panel ">
                     </br>
                     <button id="btn_de_active" class="btn btn-danger pull-right">DEACTIVATE</button>
                     <button id="btn_save_active" class="btn btn-warning pull-right">ACTIVATE</button>
                     <button id="btn_add_new" data-toggle="modal" data-target="#myModal" class="btn btn-success pull-left">Add New</button>
 
-                      <!-- <button data-toggle="modal" data-target="#myModal" class="btn btn-primary btn_option">More Option</button>
-                                  Modal HTML -->
+
                     </br> </br> </br>
                   <ul id="template_header" class="nav ">
                             <li class="col-lg-1" ><h3>NO#</h3></li>
@@ -100,15 +99,11 @@ if (isset($_SESSION['logged_in']) == true) {
                      </div>
             </div>
 </div>
+            <!--------------------------------------------Members Panel--------------------------------------------->
             <div id="members_panel" class="tab-pane fade">
                 </br>
                   <button id="btn_add_member" data-toggle="modal" data-target="#myModalMembers" class="btn btn-success pull-left">Add Member</button>
-                   <!--   <button id="btn_de_active" class="btn btn-danger pull-right">DEACTIVATE</button>
-                    <button id="btn_save_active" class="btn btn-warning pull-right">ACTIVATE</button>
-                    <button id="btn_add_new" data-toggle="modal" data-target="#myModal" class="btn btn-success pull-left">Add New</button>
 
-                     <button data-toggle="modal" data-target="#myModal" class="btn btn-primary btn_option">More Option</button>
-                                  Modal HTML -->
                     </br> </br> </br>
                   <ul id="template_members_header" class="nav ">
                             <li class="col-lg-2" ><h3>NO/ID</h3></li>
@@ -134,11 +129,15 @@ if (isset($_SESSION['logged_in']) == true) {
                      </div>
             </div>
             </div>
-            <div id="dropdown1" class="tab-pane fade">
-                <h3>Activities View 1</h3>
-                <p>WInteger convallis, nulla in sollicitudin placerat, ligula enim auctor lectus, in mollis diam dolor at lorem.
-                 Sed bibendum nibh sit amet dictum feugiat. Vivamus arcu sem, cursus a feugiat ut, iaculis at erat. Donec vehicula at ligula vitae venenatis.
-                  Sed nunc nulla, vehicula non porttitor in, pharetra et dolor. Fusce nec velit velit. Pellentesque consectetur eros.</p>
+
+
+            <div id="upload_image" class="tab-pane fade">
+                <h3>Upload Image</h3>
+               <form action="upload.php" method="post" enctype="multipart/form-data">
+                    Select image to upload:
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input type="submit" value="Upload Image" name="submit">
+                </form>
             </div>
             <div id="dropdown2" class="tab-pane fade">
                 <h3>Activities View 2</h3>
@@ -348,7 +347,7 @@ if (isset($_SESSION['logged_in']) == true) {
 
         })
 //-------------------------------------------------modal Add New list
-        $(".list_btn_add_new").click(function(){
+        $(".list_btn_add_new").click(function(e){
             // console.log("btn_save_active clicked");
             //console.log('update button click');
             // var items_id = $('#form_id').val();
@@ -378,11 +377,13 @@ if (isset($_SESSION['logged_in']) == true) {
                 data : list_add_new,
                 dataType : 'jsonp',
                 success : function(response){
+                    //console.log("response",response)
                     alert("Add Success" + response.data)
                     window.location.href = "admin";
                 }
             });
 
+            e.preventDefault();
         })
 //-------------------------------------------------modal Update button
         $(".list_btn_update").click(function(){
@@ -535,7 +536,7 @@ if (isset($_SESSION['logged_in']) == true) {
 
 //-------------------------------------------------get json object and set into clone template button
 
-        var cat = 'bird';
+        var cat = 'all';
         $.ajax({
             url : 'api/list/'+cat,
             dataType : 'jsonp',
