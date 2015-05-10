@@ -46,18 +46,19 @@ if (isset($_SESSION['logged_in']) == true) {
         <ul class="nav nav-pills nav-stacked" id="myTab">
             <li class="admin_panel"><a data-toggle="tab"  href="#admin_panel">Admin Panel</a></li>
             <li class="members_panel"><a data-toggle="tab" href="#members_panel">Member Panel</a></li>
+               <li class="upload_panel"><a data-toggle="tab" href="#" id="upload">Upload Image</a></li>
 
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">School Activities<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a data-toggle="tab" href="#upload_image">Activities 1</a></li>
+                    <li><a data-toggle="tab" href="#upload_image" id="">Upload</a></li>
                     <li><a data-toggle="tab" href="#dropdown2">Activities 2</a></li>
                 </ul>
             </li>
         </ul>
     </div>
     <!----------------------------------admin right-------------------------->
-    <div class="col-lg-9 col-md-9 main_admin_right ">
+    <div class="col-lg-9 col-md-9 main_admin_right " id="main_test">
     <!--------------------------------------------list Panel--------------------------------------------->
             <div id="admin_panel" class="fade admin_panel ">
                     </br>
@@ -133,11 +134,7 @@ if (isset($_SESSION['logged_in']) == true) {
 
             <div id="upload_image" class="tab-pane fade">
                 <h3>Upload Image</h3>
-               <form action="upload.php" method="post" enctype="multipart/form-data">
-                    Select image to upload:
-                    <input type="file" name="fileToUpload" id="fileToUpload">
-                    <input type="submit" value="Upload Image" name="submit">
-                </form>
+
             </div>
             <div id="dropdown2" class="tab-pane fade">
                 <h3>Activities View 2</h3>
@@ -241,6 +238,8 @@ if (isset($_SESSION['logged_in']) == true) {
                             </div>
 </div>
     <?php
+
+
 }
 ?>
 <script>
@@ -258,8 +257,78 @@ if (isset($_SESSION['logged_in']) == true) {
         $('.members_panel').on('click', function(){
             $('#admin_panel').removeClass('active_z');
             $('#members_panel').addClass('active_z');
+        })
+       // $("#upload").on('click',function(){
+         //  $( "#main_test" ).load( "template/upload.php", function() {
+              //  alert( "Load was performed." );
+           //
+
+            //-----------------------------------------------------------------------------ajax Upload------------------------------
+            //click admin upload button
+        $("#upload").click(function(){
+
+            $.ajax({
+                url : "update.php?action=upload_images",
+                method : "GET",
+                success : function(response){
+
+                    $("#main_test").html(response).css({
+                        width : 400,
+                        margin: 'auto'
+                    })
+
+
+                }
+
+            })
 
         })
+            //click upload button
+            $(document).on("click","#uploaded #file_upload_button",function(){
+                //create file form post data
+                var formData = new FormData();
+                var image = $("#file")[0].files[0];
+
+                if (typeof image == "undefined"){
+                    alert("Please select image to upload");
+                    return;
+                }
+
+                formData.append("file", image);
+
+                $.ajax({
+                    url: "update.php?action=upload_images",  //Server script to process data
+                    type: "POST",
+                    success: function(response){
+                        console.log(response)
+                        if (/Uploaded/.test(response)){
+
+                            //reset file so new upload
+                            $("#file").val("");
+                            var image_name = image.name;
+                            $("#image_container").append(
+                                "<img src='images/upload/"+image_name+"' />"
+                            ) .css({
+                                    width : 400,
+                                    //            height:300,
+                                    margin: 'auto'
+                                })
+                        }
+
+                        if (/failed/.test(response)){
+                            alert(response);
+                        }
+
+                    },
+                    // Form data
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            });
+
+
 
 //-----------------------------------------Un-active the check box if it is active--------------------------//
         $('#btn_add_new').on('click', function(){
