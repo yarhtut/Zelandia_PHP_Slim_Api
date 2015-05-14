@@ -100,13 +100,13 @@ a{
     z-index:-1;
 }
 #admin_panel{
-   position:absolute;
+
 
     width:100%;
     background:#ddd;
 }
 #members_panel{
-    position:absolute;
+
     width:100%;
     background:#ddd;
 }
@@ -173,13 +173,13 @@ a{
 }
 .btn_option {
     width: 100%;
-    margin-top:5px;
+
     text-align: left;
     padding-left:3px;
 }
 #img{
     width:50px;
-    height:50px;
+    height:48px;
 }
 .btn_update_delete{
     color:#232323;

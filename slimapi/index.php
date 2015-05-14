@@ -119,8 +119,6 @@ $app->group('/admin', function () use ($db,$app) {
     //define our response back to ajax
     $response['success'] = false;
     $response['data'] = null;
-
-
 	$app->get('/sendData', function () use($db,$app, $response) {
 	 
         $userDetails = $app->request->get('userDetails');
@@ -257,6 +255,30 @@ $app->group('/admin', function () use ($db,$app) {
         echo $_GET['callback']."(".json_encode($response).")";
         //$response['success'] = $success;
     });
+
+    //---------------------------------------------Member json data call from api
+    $app->get('/members/:type', function ($cat) use($db,$app, $response) {
+
+        $SQL = "SELECT * FROM `members` WHERE `type_admin` = '0'";
+        $type_members = $db->query($SQL);
+
+        $success = ($type_members ->num_rows >0) ?true: false;
+
+
+        $response['success'] = $success;
+
+        $results = array();
+
+        while($result = $type_members->fetch_assoc())
+            $results[] = $result;
+
+
+        $response['data'] = $results;
+
+        // returnResponse($response);
+        echo $_GET['callback']."(".json_encode($response).")";
+        //$response['success'] = $success;
+    });
     //-------------------------------------------------ADMIN ENABLE WHICH IS ACTIVE OR NOT
     $app->get('/list/:cat/1', function ($cat, $active) use($db,$app, $response) {
 
@@ -282,10 +304,10 @@ $app->group('/admin', function () use ($db,$app) {
         }
 
     });
-    //----------------------------LIST VIEW FOR EDUCATION ONLY SHOW WHICH IS ACTIVE '1' BY ADMIN
+    //============================LIST VIEW FOR EDUCATION ONLY SHOW WHICH IS ACTIVE '1' BY ADMIN==========
     $app->get('/list/:cat/:active', function ($cat, $active) use($db,$app, $response) {
         $active_request = ($active == 'active')? 1 : 0 ;
-        $SQL = "SELECT * FROM `listview` WHERE `list_cat` = '$cat' AND `list_active` = '$active_request'";
+        $SQL = "SELECT * FROM `listview` WHERE `list_cat` = '$cat' AND `list_active` = '$active_request';";
         $cat_results = $db->query($SQL);
 
 
@@ -305,9 +327,30 @@ $app->group('/admin', function () use ($db,$app) {
         //$response['success'] = $success;
     });
 
+    //============================LIST VIEW FOR EDUCATION ONLY SHOW WHICH IS ACTIVE '1' BY ADMIN==========
+    $app->get('/list/:active', function ( $active) use($db,$app, $response) {
+        $active_request = ($active == 'active')? 1 : 0 ;
+        $SQL = "SELECT * FROM `listview` WHERE `list_active` = '$active_request';";
+        $cat_results = $db->query($SQL);
 
 
-    //========================================update our list from admin panel
+        $success = ($cat_results->num_rows > 0) ? true : false;
+        $response['success'] = $success;
+
+        $results = array();
+
+        while($result = $cat_results->fetch_assoc())
+            $results[] = $result;
+
+
+        $response['data'] = $results;
+
+        $response['debug']=$SQL;
+        returnResponse($response);
+        //$response['success'] = $success;
+    });
+
+    //========================================update our list from admin panel===========================
     $app->post('/update/:action', function ($action) use($db,$app, $response) {
         //security check ONLY admin can update
         //CHECK SESSION ACCOUNT
@@ -321,6 +364,7 @@ $app->group('/admin', function () use ($db,$app) {
                // $active = $app->request->post("data");
                 $list_id = $app->request->post("list_id");
                 $list_name = $app->request->post("list_name");
+                $list_type = $app->request->post("list_type");
                 $list_cat = $app->request->post("list_cat");
                 $list_img = $app->request->post("list_img");
                 $list_sound= $app->request->post("list_sound");
@@ -335,7 +379,7 @@ $app->group('/admin', function () use ($db,$app) {
                     // $active = $app->request->post("data");
                     // $IDS = implode(",", $items);
 
-                    $SQL_INSERT = "INSERT INTO `listview` (`list_name`,`list_cat`, `list_img`, `list_sound`,`list_points`, `list_desc`) VALUES ( '$list_name','$list_cat', '$list_img', '$list_sound','$list_points', '$list_desc');";
+                    $SQL_INSERT = "INSERT INTO `listview` (`list_name`,`list_cat`,`list_type`, `list_img`, `list_sound`,`list_points`, `list_desc`) VALUES ( '$list_name','$list_cat','$list_type', '$list_img', '$list_sound','$list_points', '$list_desc');";
 
                     //returnResponse($SQL_INSERT);
                     $add_new = $db->query($SQL_INSERT);
@@ -370,9 +414,7 @@ $app->group('/admin', function () use ($db,$app) {
                 if ($action == 'update'){
                     // $active = $app->request->post("data");
                    // $IDS = implode(",", $items);
-
-                    $SQL_UPDATE = "UPDATE `listview` SET `list_name` = '$list_name', `list_img` = '$list_img' , `list_sound` = '$list_sound', `list_points` = '$list_points' , `list_desc` = '$list_desc' WHERE `list_id` = '$list_id';";
-
+                    $SQL_UPDATE = "UPDATE `listview` SET `list_name` = '$list_name', `list_cat` = '$list_cat',`list_type`='$list_type', `list_img` = '$list_img' , `list_sound` = '$list_sound', `list_points` = '$list_points' , `list_desc` = '$list_desc' WHERE `list_id` = '$list_id';";
 
                     $update = $db->query($SQL_UPDATE);
                     if ($update){
@@ -387,6 +429,9 @@ $app->group('/admin', function () use ($db,$app) {
                 }
                 if ($action == 'active'){
                     // $active = $app->request->post("data");
+
+                    //check $items contains length string or possible use is_array
+
                     $IDS = implode(",", $items);
                     $SQL = "UPDATE  `listview` SET  `list_active` =  '1' WHERE `list_id` IN($IDS) ";
                     $update = $db->query($SQL);
@@ -444,14 +489,17 @@ $app->group('/admin', function () use ($db,$app) {
                 $member_id = $app->request->post("member_id");
                 $member_username = $app->request->post("member_username");
                 $member_password = $app->request->post("member_password");
-                $member_mobile = $app->request->post("member_mobile");
+                //$member_mobile = $app->request->post("member_mobile");
+                $school_name = $app->request->post("school_name");
+
+                $type_admin = $app->request->post("type_admin");
 
                 //lets update MEMBER
                 //deletes
 
                 if ($action == 'addNewMember'){
 
-                    $SQL_INSERT = "INSERT INTO `members` (`user_name`, `pass_word`, `cellnumber`) VALUES ('$member_username', '$member_password', '$member_mobile');";
+                    $SQL_INSERT = "INSERT INTO `members` (`user_name`, `pass_word`, `school_name`) VALUES ('$member_username', '$member_password', '$school_name');";
 
                     $add_new = $db->query($SQL_INSERT);
                     if ($add_new){
@@ -483,10 +531,9 @@ $app->group('/admin', function () use ($db,$app) {
                 }
                 if ($action == 'update'){
                     // $active = $app->request->post("data");
-                    // $IDS = implode(",", $items);
 
-                    $SQL_UPDATE = "UPDATE `members` SET `user_name` = '$member_username', `pass_word` = '$member_password' , `cellnumber` = '$member_mobile' WHERE `id` = '$member_id';";
-
+                   // $SQL_UPDATE = "UPDATE `members` SET `user_name` = '$member_username', `pass_word` = '$member_password' , `cellnumber` = '$member_mobile' WHERE `id` = '$member_id';";
+                    $SQL_UPDATE = "UPDATE `members` SET `user_name` = '$member_username', `pass_word` = '$member_password' ,`school_name` = '$school_name' WHERE `id` = '$member_id';";
 
                     $update = $db->query($SQL_UPDATE);
                     if ($update){
@@ -509,9 +556,9 @@ $app->group('/admin', function () use ($db,$app) {
         }else{
             $response['data'] = "User not logged in";
         }
-        echo json_encode($response);
-        echo $_GET['callback']."(".json_encode($response).")";
-        //returnResponse($response);
+        //echo json_encode($response);
+        //echo $_GET['callback']."(".json_encode($response).")";
+        returnResponse($response);
     });
 
 

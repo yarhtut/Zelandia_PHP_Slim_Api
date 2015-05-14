@@ -8,7 +8,7 @@ if (isset($_SESSION['logged_in']) == false) {
     exit;
 }
 
-require_once("template/connect.php");
+require_once("connect.php");
 //require_once("admin.php");
 //we will check $_GET request
 
@@ -34,10 +34,8 @@ function upload_images(){
 
 
   if (isset($_FILES['file'])){
-	  
-	  $BACK_DIR = '../..';
 
-     $IMAGE_DIR = dirname(__FILE__). DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR  ;
+     $IMAGE_DIR = dirname(__FILE__). DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'galleries' . DIRECTORY_SEPARATOR ;
 
     $name = $_FILES ['file']['name'];
     $tmp_name = $_FILES ['file']['tmp_name'];
@@ -45,7 +43,7 @@ function upload_images(){
     if(!empty($name)){
 
 
-        if( move_uploaded_file($_FILES["file"]["tmp_name"], $IMAGE_DIR.$name)){
+        if( move_uploaded_file($tmp_name, $IMAGE_DIR.$name)){
 
             echo "Uploaded $name";
         }else{

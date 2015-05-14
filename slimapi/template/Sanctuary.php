@@ -26,7 +26,7 @@
                                         <h3 id="name"></h3>
                                     </div>
                                     <a href="#">
-                                        <img id="img_sanctuary" class="img-responsive section-images" alt="Bootstrap template" src="" />
+                                        <img id="img_sanctuary" class="img-responsive section-images" alt="" src="" />
                                     </a>
                                 </div>
                                 <div class="">
@@ -57,17 +57,21 @@
         $("." + $section).show();
     }
 
+
     $("document").ready(function(){
+        $("#all").click(function(){
+            $(".section_all").show();
+        });
 
         $("#section_plants ").click(function(){
             showCat("plants");
         })
         $("#section_birds").click(function(){
-            showCat("bird");
+            showCat("birds");
         });
 
         $("#section_inserts").click(function(){
-            //showCat("insects");
+            showCat("insects");
         });
 
         var cat = 'all';
@@ -90,7 +94,6 @@
                         $(clone_template_plants).attr('id',items.list_id + "_" + items.list_cat);
 
 
-
                         $("#cat", clone_template_plants).text(items.list_cat);
                         $("#name", clone_template_plants).text(items.list_name);
                         $("#points", clone_template_plants).text(items.list_points);
@@ -110,78 +113,7 @@
                 //showCat()
             }
         });
-/**
-        var cat = 'bird';
-        $.ajax({
-            url : 'api/list/'+cat,
-            dataType : 'jsonp',
-            success : function(response){
-                //clone our template
-               var template = $("#template").clone();
 
-                if (response.success == true){
-                    var cat = response.data;
-                    // console.log("cat",response.data)
-                    $.each(cat, function(index,items){
-
-                        //  console.log("items",items);
-
-                        var clone_template = $("#template").clone();
-                        $("#cat", clone_template).text(items.list_cat);
-                        $("#name", clone_template).text(items.list_name);
-                        $("#points", clone_template).text(items.list_points);
-                        $("#img_sanctuary", clone_template).attr('src',$imagePath +items.list_img);
-                        $("#sound", clone_template).attr('src',items.list_sound);
-                        $("#description", clone_template).text(items.list_desc);
-                        // console.log("clone_template",clone_template.html());
-                        $(".tab-content").append(clone_template);
-
-                    })
-                    }else{
-
-                }
-
-            }
-        });
-
-        */
-
-        /**
-        var cat = 'insects';
-        $.ajax({
-            url : 'api/list/'+cat,
-            dataType : 'jsonp',
-            success : function(response){
-                //clone our template
-                var template_insects = $("#template_insects").clone();
-
-                if (response.success == true){
-                    var cat = response.data;
-                    // console.log("cat",response.data)
-                    $.each(cat, function(index,items){
-
-                        //  console.log("items",items);
-
-                        var clone_template = $("#template_insects").clone();
-
-                        $("#name_insect", clone_template).text(items.list_name);
-                        $("#points_insect", clone_template).text(items.list_points);
-                        $("#img_sanctuary_insect", clone_template).attr('src',$imagePath +items.list_img);
-                        $("#sound_insect", clone_template).attr('src',items.list_sound);
-                        $("#description_insect", clone_template).text(items.list_desc);
-                        // console.log("clone_template",clone_template.html());
-
-                        $(".tab-content-insects").append(clone_template);
-
-                    })
-
-                }else{
-
-                }
-                //  console.log("response",response)
-            }
-        });
-*/
 
 
 
