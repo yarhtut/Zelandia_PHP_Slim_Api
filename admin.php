@@ -44,12 +44,10 @@ if (isset($_SESSION['logged_in']) == true) {
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">School Activities<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a data-toggle="tab" href="" id="activity_list">Activity Lists</a></li>
-
+                    <li><a data-toggle="tab" href="#upload_image" id="">Upload</a></li>
+                    <li><a data-toggle="tab" href="#dropdown2">Activities 2</a></li>
                 </ul>
-
             </li>
-
         </ul>
     </div>
     <!----------------------------------admin right-------------------------->
@@ -141,10 +139,11 @@ if (isset($_SESSION['logged_in']) == true) {
                                                  <div id="show_upload_image"></div>
                                             </div>
                                             <div class="form-group">
-                                         <!--   <button class="btn btn-primary  pull-right"><a data-toggle="tab" href="#" id="upload_sound">Upload Mp3</a></button>-->
+                                            <button class="btn btn-primary  pull-right"><a data-toggle="tab" href="#" id="upload_sound">Upload Mp3</a></button>
                                                 <label for="sound" class="control-label">Sound:</label>
                                                 <input type="text" class="form-control" id="form_sound">
                                                  <div id="upload_mp3_div"></div>
+                                                  <div id="show_upload_mp3"></div>
 
                                             </div>
                                             <div class="form-group">
@@ -191,10 +190,13 @@ if (isset($_SESSION['logged_in']) == true) {
                                                 <input type="text" class="form-control" id="members_password" value="">
                                             </div>
                                             <div class="form-group">
-                                                <label for="number" class="control-label">School Name:</label>
-                                                <input type="text" class="form-control" id="members_school_name" value="">
+                                                <label for="number" class="control-label">Mobile Number:</label>
+                                                <input type="text" class="form-control" id="members_mobile">
                                             </div>
-
+                                             <div class="form-group">
+                                                <label for="admin" class="control-label">Admin or Member:</label>
+                                                <input type="text" class="form-control" id="type_admin">
+                                            </div>
 
                                         </form>
                                     </div>
@@ -224,22 +226,12 @@ if (isset($_SESSION['logged_in']) == true) {
             $( "#main_test" ).load( "template/list_view.php", function() {
                 //alert( "Load was performed." );
             });
-
-
         })
         $('#members').on('click', function(){
             $( "#main_test" ).load( "template/member_panel.php", function() {
                 //alert( "Load was performed." );
             });
         })
-        $('#activity_list').on('click', function(){
-            $( "#main_test" ).load( "template/activity_list.php", function() {
-                //alert( "Load was performed." );
-            });
-        })
-
-
-
 //-------------------------------------------------modal Update button
         $(".members_btn_update").click(function(){
             // console.log("btn_save_active clicked");
@@ -248,18 +240,20 @@ if (isset($_SESSION['logged_in']) == true) {
             var member_id= $('#members_form_id').val();
             var member_username= $('#members_username').val();
             var member_password=  $('#members_password').val();
-            var school_name = $('#members_school_name').val();
+            var member_mobile = $('#members_mobile').val();
+            var type_admin = $('#type_admin').val();
+
+
 
             //jquery to update our list
             var member_update= {
                 member_id : member_id,
                 member_username:member_username,
                 member_password:member_password,
-                school_name:school_name
-
+                member_mobile:member_mobile,
+                type_admin:type_admin
 
             }
-
             console.log("final save",member_update)
             //ajax push to api
             $.ajax({
@@ -269,13 +263,13 @@ if (isset($_SESSION['logged_in']) == true) {
                 dataType : 'jsonp',
                 success : function(response){
                     alert("Update  Success" + response.data)
-                  //  window.location.href = "admin";
+                    window.location.href = "admin";
                 }
             });
 
         })
 
-//-----------------------------------------------------------------------------ajax Upload------------------------------
+//----------------------------------------------------ajax Upload------------------------------
         //click admin upload button
         $("#upload").click(function(){
 
@@ -295,7 +289,6 @@ if (isset($_SESSION['logged_in']) == true) {
             })
 
         })
-
         //click upload button
         $(document).on("click","#uploaded #file_upload_button",function(){
             //create file form post data
@@ -343,60 +336,58 @@ if (isset($_SESSION['logged_in']) == true) {
                 cache: false,
                 contentType: false,
                 processData: false
-            });  e.preventDefault();
+            });  event.preventDefault();
         });
-//-----------------------------------------------------------------------------ajax Upload------------------------------
+//----------------------------------------------------ajax Upload------------------------------
         //click admin upload button
         $("#upload_sound").click(function(){
-
             $.ajax({
                 url : "update.php?action=upload_mp3",
                 method : "GET",
                 success : function(response){
-
                     $("#upload_mp3_div").html(response).css({
-
                         margin: 'auto'
                     })
                 }
             })
-
         })
-
         //click upload button
-        $(document).on("click","#uploaded #sound_upload_button",function(){
+        $(document).on("click","#uploaded_sound #sound_upload_button",function(){
             //create file form post data
             var formData = new FormData();
             var sound = $("#file")[0].files[0];
 
-            if (typeof image == "undefined"){
-                alert("Please select image to upload");
+            if (typeof sound == "undefined"){
+                alert("Please select mp3 to upload");
                 return;
             }
-
-            formData.append("file", image);
-
+            formData.append("file", sound);
             $.ajax({
                 url: "update.php?action=upload_mp3",  //Server script to process data
                 type: "POST",
                 success: function(response){
-                    console.log(response)
+                  //  console.log(response)
                     if (/Uploaded/.test(response)){
 
                         //reset file so new upload
                         $("#file").val("");
                         var sound_name = sound.name;
+                        $("#show_upload_mp3").append(
+                            "<audio src='images/"+sound_name+"' />  "
+
+                        ) .css({
+                                width : 100,
+                                height:80,
+                                margin: 'auto'
+                            })
 
                         $("#form_sound").val(
                             sound_name
                         )
-
                     }
-
                     if (/failed/.test(response)){
                         alert(response);
                     }
-
                 },
                 // Form data
                 data: formData,
@@ -404,9 +395,62 @@ if (isset($_SESSION['logged_in']) == true) {
                 contentType: false,
                 processData: false
             });event.preventDefault();
-        }); event.preventDefault();
+        });
+        //-------------------------------------------------get json object and set into clone template button-----------------
+        var type = '0';
+        $.ajax({
+            url : 'api/members/'+type,
+            dataType : 'jsonp',
+            success : function(response){
+                //clone our template
 
 
+                if (response.success == true){
+                    var type = response.data;
+                    // console.log("cat",response.data)
+                    $.each(type, function(index,items){
+
+                        var clone_template = $("#template_members").clone();
+                        $(clone_template).attr('id',"members_id_"+items.id);
+                        $("#members_id", clone_template).text(items.id);
+                        $("#username", clone_template).text(items.user_name);
+                        $("#password", clone_template).text(items.pass_word);
+                        $("#mobile_number", clone_template).text(items.cellnumber);
+                        $("#type_admin", clone_template).text(items.type_admin);
+                        $(".btn_members_option", clone_template).attr('members_id_add',+ items.id);
+                        $(".tab_content_members").append(clone_template);
+                    })
+
+                    $('.btn_members_option').on('click',function(){
+
+
+                        $(".members_btn_add_new").hide();
+                        $('.members_btn_delete').show();
+                        $('.members_btn_update').show();
+                        //  $("#members_form_id").prop('disabled', true);
+                        var btn_option_id =  $(this).attr("members_id_add");
+                        console.log('members_id_'+btn_option_id);
+                        var theDiv = $('#members_id_'+btn_option_id);
+                        var members_id = $( "#members_id",theDiv).text();
+                        var members_name = $( "#username",theDiv).text();
+                        var members_password = $('#password', theDiv).text();
+                        var members_mobile = $( "#mobile_number",theDiv).text();
+                        var type_admin = $( "#type_admin",theDiv).text();
+
+                        $('#members_form_id').val(members_id);
+                        $('#members_username').val(members_name);
+                        $('#members_password').val(members_password);
+                        $('#members_mobile').val(members_mobile);
+                        $('#type_admin').val(type_admin);
+
+                    })
+
+                }else{
+                    //alert("login failed" + response.data)
+                }
+                //  console.log("response",response)
+            }
+        });
     })
 
 

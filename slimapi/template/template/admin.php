@@ -44,12 +44,10 @@ if (isset($_SESSION['logged_in']) == true) {
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">School Activities<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a data-toggle="tab" href="" id="activity_list">Activity Lists</a></li>
-
+                    <li><a data-toggle="tab" href="#upload_image" id="">Upload</a></li>
+                    <li><a data-toggle="tab" href="#dropdown2">Activities 2</a></li>
                 </ul>
-
             </li>
-
         </ul>
     </div>
     <!----------------------------------admin right-------------------------->
@@ -141,7 +139,7 @@ if (isset($_SESSION['logged_in']) == true) {
                                                  <div id="show_upload_image"></div>
                                             </div>
                                             <div class="form-group">
-                                         <!--   <button class="btn btn-primary  pull-right"><a data-toggle="tab" href="#" id="upload_sound">Upload Mp3</a></button>-->
+                                            <button class="btn btn-primary  pull-right"><a data-toggle="tab" href="#" id="upload_sound">Upload Mp3</a></button>
                                                 <label for="sound" class="control-label">Sound:</label>
                                                 <input type="text" class="form-control" id="form_sound">
                                                  <div id="upload_mp3_div"></div>
@@ -191,10 +189,13 @@ if (isset($_SESSION['logged_in']) == true) {
                                                 <input type="text" class="form-control" id="members_password" value="">
                                             </div>
                                             <div class="form-group">
-                                                <label for="number" class="control-label">School Name:</label>
-                                                <input type="text" class="form-control" id="members_school_name" value="">
+                                                <label for="number" class="control-label">Mobile Number:</label>
+                                                <input type="text" class="form-control" id="members_mobile">
                                             </div>
-
+                                             <div class="form-group">
+                                                <label for="admin" class="control-label">Admin or Member:</label>
+                                                <input type="text" class="form-control" id="type_admin">
+                                            </div>
 
                                         </form>
                                     </div>
@@ -232,11 +233,6 @@ if (isset($_SESSION['logged_in']) == true) {
                 //alert( "Load was performed." );
             });
         })
-        $('#activity_list').on('click', function(){
-            $( "#main_test" ).load( "template/activity_list.php", function() {
-                //alert( "Load was performed." );
-            });
-        })
 
 
 
@@ -248,18 +244,20 @@ if (isset($_SESSION['logged_in']) == true) {
             var member_id= $('#members_form_id').val();
             var member_username= $('#members_username').val();
             var member_password=  $('#members_password').val();
-            var school_name = $('#members_school_name').val();
+            var member_mobile = $('#members_mobile').val();
+            var type_admin = $('#type_admin').val();
+
+
 
             //jquery to update our list
             var member_update= {
                 member_id : member_id,
                 member_username:member_username,
                 member_password:member_password,
-                school_name:school_name
-
+                member_mobile:member_mobile,
+                type_admin:type_admin
 
             }
-
             console.log("final save",member_update)
             //ajax push to api
             $.ajax({
@@ -269,7 +267,7 @@ if (isset($_SESSION['logged_in']) == true) {
                 dataType : 'jsonp',
                 success : function(response){
                     alert("Update  Success" + response.data)
-                  //  window.location.href = "admin";
+                    window.location.href = "admin";
                 }
             });
 
@@ -343,7 +341,7 @@ if (isset($_SESSION['logged_in']) == true) {
                 cache: false,
                 contentType: false,
                 processData: false
-            });  e.preventDefault();
+            });  event.preventDefault();
         });
 //-----------------------------------------------------------------------------ajax Upload------------------------------
         //click admin upload button
@@ -405,8 +403,6 @@ if (isset($_SESSION['logged_in']) == true) {
                 processData: false
             });event.preventDefault();
         }); event.preventDefault();
-
-
     })
 
 

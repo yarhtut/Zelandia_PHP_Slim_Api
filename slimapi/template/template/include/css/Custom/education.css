@@ -1,0 +1,86 @@
+.section-text-wrapper{
+    width:90%;
+    margin:auto;
+    height:auto;
+
+}
+.nav-tabs{
+    background:rgba(34,34,34,1);
+    margin-top:-21px;
+}
+
+.section-text-wrapper span{
+    color:#Ed6726;
+}
+.section-text-wrapper p{
+    font-weight:400 !important;
+    color:#444;
+}
+.main_json_object h6{
+    font-weight:400 !important;
+    font-size:24px;
+    color:#eee;
+}
+.main_json_object h3{
+    font-weight:300 !important;
+    color:#f26122;
+    -webkit-transform:scale(1.0, 2.0);
+    -moz-transform:scale(1.0, 2.0);
+    -ms-transform:scale(1.0, 2.0);
+    -o-transform:scale(1.0, 2.0);
+    transform:scale(1.0, 2.0);
+}
+.main_json_object h1{
+    font-weight:300 !important;
+    color:#f26122;
+    font-size:24px;
+    -webkit-transform:scale(1.0, 2.0);
+    -moz-transform:scale(1.0, 2.0);
+    -ms-transform:scale(1.0, 2.0);
+    -o-transform:scale(1.0, 2.0);
+    transform:scale(1.0, 2.0);
+}
+.main_json_object{
+    padding-top:30px;
+    padding-bottom:10px;
+}
+.json_object_wrapper{
+    width:90%;
+    margin:0px auto;
+
+}
+.json_object_header{
+    height:40px;
+    background:#222;
+}
+.text-center a{
+     color:black;
+
+ }
+#myTab{
+
+    border-radius:3px 3px 0px 0px;
+}
+#myTab li a{
+    color:#fff;
+    font-weight:400 !important;
+    text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+    padding:8px 20px 8px 20px;
+
+}
+#myTab  li,a:hover{
+   / border:none!important;
+
+}
+#myTab  .active > a{
+    text-shadow: 1px 1px 1px rgba(120, 120, 120, 1);
+    color:#fff;
+
+}
+.section-images{
+    width:100%;
+    height:120px !important;
+}
+.tab-content{
+    padding-bottom:50px;
+}

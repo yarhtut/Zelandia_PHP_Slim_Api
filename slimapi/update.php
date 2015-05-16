@@ -19,6 +19,9 @@ if (isset($_GET) && isset($_GET['action']) && !empty($_GET['action'])){
         case "upload_images" :
             upload_images();
             break;
+        case "upload_mp3" :
+            upload_mp3();
+            break;
 
 
         default:
@@ -30,54 +33,105 @@ if (isset($_GET) && isset($_GET['action']) && !empty($_GET['action'])){
 }
 
 //---------------------------------------------------------upload images------------------------------------------
-function upload_images(){
+function upload_images()
+{
 
 
-  if (isset($_FILES['file'])){
-	  
-	  $BACK_DIR = '../..';
+    if (isset($_FILES['file'])) {
 
-     $IMAGE_DIR = dirname(__FILE__). DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR  ;
+        $BACK_DIR = '../..';
 
-    $name = $_FILES ['file']['name'];
-    $tmp_name = $_FILES ['file']['tmp_name'];
+        $IMAGE_DIR = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
 
-    if(!empty($name)){
+        $name = $_FILES ['file']['name'];
+        $tmp_name = $_FILES ['file']['tmp_name'];
+
+        if (!empty($name)) {
 
 
-        if( move_uploaded_file($_FILES["file"]["tmp_name"], $IMAGE_DIR.$name)){
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], $IMAGE_DIR . $name)) {
 
-            echo "Uploaded $name";
-        }else{
-            if (file_exists($IMAGE_DIR.$name)){
-                echo "failed to move file $name check file does not exist";
-            }else{
+                echo "Uploaded $name";
+            } else {
+                if (file_exists($IMAGE_DIR . $name)) {
+                    echo "failed to move file $name check file does not exist";
+                } else {
 
-                echo "Check dir read/write permission's chmod 777";
+                    echo "Check dir read/write permission's chmod 777";
+                }
             }
+
+        } else {
+            echo('Please choose a image');
         }
+        // move_uploaded_file("")
 
-    }else{
-        echo('Please choose a image');
+        return;
     }
-   // move_uploaded_file("")
-
-      return;
-  }
- ?>
+    ?>
 
 
-        <div id ="uploaded" type="upload_images">
+    <div id="uploaded" type="upload_images">
 
-                <input id="file" type="file" name="file">
+        <input id="file" type="file" name="file">
 
-                <button id="file_upload_button" >Upload</button>
+        <button id="file_upload_button">Upload</button>
 
-        </div>
-        <div id="image_container"></div>
+    </div>
+    <div id="image_container"></div>
 <?php
-
-
 }
 
+
+
+//---------------------------------------------------------upload images------------------------------------------
+function upload_mp3()
+{
+
+
+    if (isset($_FILES['file'])) {
+
+        $BACK_DIR = '../..';
+
+        $IMAGE_DIR = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sound' . DIRECTORY_SEPARATOR;
+
+        $name = $_FILES ['file']['name'];
+        $tmp_name = $_FILES ['file']['tmp_name'];
+
+        if (!empty($name)) {
+
+
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], $IMAGE_DIR . $name)) {
+
+                echo "Uploaded $name";
+            } else {
+                if (file_exists($IMAGE_DIR . $name)) {
+                    echo "failed to move file $name check file does not exist";
+                } else {
+
+                    echo "Check dir read/write permission's chmod 777";
+                }
+            }
+
+        } else {
+            echo('Please choose a sound');
+        }
+        // move_uploaded_file("")
+
+        return;
+    }
+    ?>
+
+
+    <div id="uploaded_sound" type="upload_sound">
+
+        <input id="file" type="file" name="file">
+
+        <button id="sound_upload_button">Upload</button>
+
+    </div>
+    <div id="sound_container"></div>
+<?php
+}
 ?>
+

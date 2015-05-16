@@ -43,13 +43,16 @@
         $('.members_btn_delete').hide();
         $('.members_btn_update').hide();
         $('.members_btn_add_new').show();
+
     });
     $(".members_btn_add_new").click(function(){
+
+
         var member_id = $('#members_form_id').val();
         var member_username= $('#members_username').val();
         var member_password=  $('#members_password').val();
        // var member_mobile = $('#members_mobile').val();
-        var school_name = $('#members_school_name').val();
+        var school_name = $('#school_name').val();
         //jquery to update our list
         var member_add_new = {
             member_id:member_id,
@@ -108,13 +111,13 @@
                 // console.log("cat",response.data)
                 $.each(type, function(index,items){
                     var clone_template = $("#template_members").clone();
-                    $(clone_template).attr('id',"members_id_"+items.user_id);
-                    $("#members_id", clone_template).text(items.user_id);
+                    $(clone_template).attr('id',"members_id_"+items.id);
+                    $("#members_id", clone_template).text(items.id);
                     $("#username", clone_template).text(items.user_name);
                     $("#password", clone_template).text(items.pass_word);
                     $("#school_name", clone_template).text(items.school_name);
                     $("#type_admin", clone_template).text(items.type_admin);
-                    $(".btn_members_option", clone_template).attr('members_id_add',+ items.user_id);
+                    $(".btn_members_option", clone_template).attr('members_id_add',+ items.id);
                     $(".tab_content_members").append(clone_template);
                 })
 
@@ -131,15 +134,15 @@
                     var members_id = $( "#members_id",theDiv).text();
                     var members_name = $( "#username",theDiv).text();
                     var members_password = $('#password', theDiv).text();
-                    var school_name = $( "#school_name",theDiv).text();
+                    var members_school = $( "#school_name",theDiv).text();
                     var type_admin = $( "#type_admin",theDiv).text();
 
                     $('#members_form_id').val(members_id);
                     $('#members_username').val(members_name);
                     $('#members_password').val(members_password);
-                    $('#members_school_name').val(school_name);
+                    $('#members_school_name').val(members_school);
                     $('#type_admin').val(type_admin);
-
+                    console.log("response",members_school_name)
 
                 })
 

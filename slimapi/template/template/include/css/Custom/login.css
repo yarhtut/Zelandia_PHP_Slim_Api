@@ -1,0 +1,191 @@
+.login_container{
+    height:100vh;
+    background:#232323 ;
+}
+.login_form {
+    width: 30%;
+    margin: auto;
+    margin-top: 10%;
+}
+.login_form input{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.login_form #sign_in{
+    height:35px;
+  //  background:#Ed6726 !important;
+}
+.login_form h1{
+    font-size:48px;
+    color:#ef9316 !important;
+}
+.login_form h3{
+    color:#eee !important;
+    padding-bottom:5px;
+
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin .checkbox {
+    font-weight: normal;
+}
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+/*---------------------------Admin Panle------------------------*/
+.admin-top-menu {
+    padding-left:20px;
+    padding-right:20px;
+    background:#393D40;
+    border-radius:0px;
+    height:7vh;
+    border-bottom:1px solid #000;
+}
+.main_admin_body{
+    width:100% !important;
+    margin:auto;
+    height:93vh !important;
+   / background:#232323;
+    border-radius:10px;
+}
+.home-back{
+    margin-left:50px;
+    padding-top:10px;
+    padding-left:10px;
+    border-left:1px solid #454545;
+}
+.admin_panel_left{
+    background:#393D40;
+    height:93vh;
+}
+.right_admin_panel_header{
+    height:40px;
+    width:100%;
+    background:#393D40;
+}
+a{
+    color:#eee;
+}
+.active_z{
+    z-index: 1;
+}
+.active_zz{
+    z-index:-1;
+}
+#admin_panel{
+
+
+    width:100%;
+    background:#ddd;
+}
+#members_panel{
+
+    width:100%;
+    background:#ddd;
+}
+#dropdown1{
+    position:absolute;
+    width:100%;
+    background:#ddd;
+}
+#dropdown2{
+    position:absolute;
+    width:100%;
+    background:#ddd;
+}
+.logout{
+    padding-top:10px;
+}
+.admin-panel-left{
+    height:90vh;
+}
+.list_template li{
+    line-height:40px;
+    text-align: center;
+    height:50px;
+    color:#000;
+    font-weight:300;
+    border:1px solid #888;
+    margin-top:3px;
+}
+.list_template li{
+    line-height:40px;
+    text-align: center;
+    height:50px;
+    color:#000;
+    font-weight:300;
+    border:1px solid #888;
+    margin-top:3px;
+}
+#template_header li{
+    line-height:10px;
+    text-align: center;
+    height:50px;
+    color:#000;
+    font-weight:300;
+    border:1px solid #888;
+    margin-top:0px;
+}
+#template_members_header li{
+    line-height:10px;
+    text-align: center;
+    height:50px;
+    color:#000;
+    font-weight:300;
+    border:1px solid #888;
+    margin-top:0px;
+}
+.list_template input{
+    margin-top:20px;
+}
+.list_template button {
+    width: 100%;
+    margin-top:5px;
+
+    padding-left:3px;
+}
+.btn_option {
+    width: 100%;
+
+    text-align: left;
+    padding-left:3px;
+}
+#img{
+    width:50px;
+    height:48px;
+}
+.btn_update_delete{
+    color:#232323;
+    font-weight:300;
+}
+audio{
+    width:40px;
+    margin-top:10px;
+}

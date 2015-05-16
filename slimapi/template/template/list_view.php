@@ -73,7 +73,9 @@
 
     //-------------------------------------------------Save the active check boc
         $("#btn_save_active_1").click(function(){
-               var items_active = [];
+        // console.log("btn_save_active clicked");
+
+        var items_active = [];
         $active = $(".active:checked");
 
         $.each($active,function(index,item){
@@ -85,7 +87,7 @@
         var list = {
             items : items_active
         }
-       console.log("final save",items_active)
+        console.log("final save",items_active)
         console.log("final save",list)
         //ajax push to api
         $.ajax({
@@ -95,16 +97,17 @@
             dataType : 'jsonp',
             success : function(response){
                 alert("List activation Success" );
-                window.location.href = "admin";
+                //window.location.href = "admin";
             }
         });
+
     })
         //-------------------------------------------------button de activate
         $("#btn_de_active").on('click', function () {
 
             var items_active = [];
 
-            $active = $("[checked=checked]");
+            $active = $("[checked = checked]");
 
             $.each($active, function (index, item) {
                 var id = $(this).attr("name")
@@ -113,7 +116,7 @@
             var list = {
                 items: items_active
             }
-
+            console.log(list);
             $.ajax({
                 url: 'api/update/unactive',
                 method: 'POST',
@@ -121,14 +124,16 @@
                 dataType: 'jsonp',
                 success: function (response) {
                     alert("List de activation Success");
-                   // window.location.href = "admin";
+                    window.location.href = "admin";
                 }
             });
 
         });
         //-------------------------------------------------modal Add New list
         $(".list_btn_add_new").click(function (e) {
-
+            // console.log("btn_save_active clicked");
+            //console.log('update button click');
+            // var items_id = $('#form_id').val();
             var items_name = $('#form_name').val();
             var items_cat = $('#form_cat').val();
             var items_type = $("#form_type").val();
@@ -136,6 +141,7 @@
             var items_sound = $('#form_sound').val();
             var items_points = $('#form_points').val();
             var items_desc = $('#desc_text').val();
+
 
             //jquery to update our list
             var list_add_new = {
@@ -162,7 +168,7 @@
                 }
             });
 
-
+            e.preventDefault();
         })
         //-------------------------------------------------modal Update button
         $(".list_btn_update").click(function () {

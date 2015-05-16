@@ -55,7 +55,7 @@ $app->get('/education', function () use($app) {
     $app->render('include/top-menu.php');
     $app->render('include/top_navbar.php');
     $app->render('include/script.php');
-    //render main home page
+    //render main education page
     $app->render('education.php');
 
 
@@ -66,7 +66,7 @@ $app->get('/Sanctuary', function () use($app) {
     $app->render('include/top-menu.php');
     $app->render('include/top_navbar.php');
     $app->render('include/script.php');
-    //render main home page
+    //render main Sanctuary page
     $app->render('Sanctuary.php');
 
 
@@ -135,7 +135,7 @@ $app->group('/admin', function () use ($db,$app) {
 
 
         //our 1 line SQL statement PLEASE YAR NO BREAK this will check username & password exist
-        $SQL_STATEMENT = "INSERT INTO school_activity(`id`, `user_id`, `cat_id`, `clicked`) VALUES(null,(SELECT id FROM members WHERE user_name = '{$user->email}' AND pass_word = '{$user->password}'),?,?);";
+        $SQL_STATEMENT = "INSERT INTO school_activity(`id`, `user_id`, `list_id`, `clicked`) VALUES(null,(SELECT id FROM members WHERE user_name = '{$user->email}' AND pass_word = '{$user->password}'),?,?);";
 
 
         $stmt = $db->prepare($SQL_STATEMENT);
@@ -186,7 +186,33 @@ $app->group('/admin', function () use ($db,$app) {
         //echo json_encode($results);
     });
 
+    //-------------------------------------------------ADMIN ENABLE WHICH IS ACTIVE OR NOT
+    $app->get('/list/activity', function () use($db,$app, $response) {
 
+        $SQL = "SELECT t1.user_id, t1.user_name, t2.clicked, t1.school_id, t3.list_img, t3.list_name,t3.list_points
+FROM members t1, school_activity t2, listview t3
+WHERE t1.user_id = t2.user_id
+AND t2.list_id = t3.list_id";
+        $cat_results = $db->query($SQL);
+
+        $success = ($cat_results->num_rows > 0) ? true : false;
+        $response['success'] = $success;
+
+        $results = array();
+
+        while($result = $cat_results->fetch_assoc())
+            $results[] = $result;
+
+
+        $response['data'] = $results;
+
+
+
+
+        returnResponse($response);
+        //$response['success'] = $success;
+        //echo json_encode($results);
+    });
     $app->get('/list/:cat', function ($cat) use($db,$app, $response) {
 
         $SQL = "SELECT * FROM `listview` WHERE `list_cat` = '$cat'";
@@ -282,14 +308,10 @@ $app->group('/admin', function () use ($db,$app) {
     //-------------------------------------------------ADMIN ENABLE WHICH IS ACTIVE OR NOT
     $app->get('/list/:cat/1', function ($cat, $active) use($db,$app, $response) {
 
-        if (isset($_POST)&&isset($_POST['id']) && isset($_POST['check'])){
-
-            $id = $_POST['id'];
+        if (isset($_POST)&&isset($_POST['list_id']) && isset($_POST['check'])){
+            $id = $_POST['list_id'];
             $check = $_POST['check'];
-
-
-            $SQL_UPDATE = "UPDATE `listview` SET `check` = '$check' WHERE `id` = 'id' ";
-
+            $SQL_UPDATE = "UPDATE `listview` SET `check` = '$check' WHERE `id` = '$id' ";
 
             $update_listview_active = $db->query($SQL_UPDATE);
             if ($update_listview_active){
@@ -304,6 +326,8 @@ $app->group('/admin', function () use ($db,$app) {
         }
 
     });
+
+
     //============================LIST VIEW FOR EDUCATION ONLY SHOW WHICH IS ACTIVE '1' BY ADMIN==========
     $app->get('/list/:cat/:active', function ($cat, $active) use($db,$app, $response) {
         $active_request = ($active == 'active')? 1 : 0 ;
@@ -376,8 +400,6 @@ $app->group('/admin', function () use ($db,$app) {
                 //active
                 //updates
                 if ($action == 'addNew'){
-                    // $active = $app->request->post("data");
-                    // $IDS = implode(",", $items);
 
                     $SQL_INSERT = "INSERT INTO `listview` (`list_name`,`list_cat`,`list_type`, `list_img`, `list_sound`,`list_points`, `list_desc`) VALUES ( '$list_name','$list_cat','$list_type', '$list_img', '$list_sound','$list_points', '$list_desc');";
 
@@ -443,13 +465,12 @@ $app->group('/admin', function () use ($db,$app) {
                         $response['data'] = "error";
                         //@todo get sql error
                     }
-
                 }
                 if($action == 'unactive'){
 
-
                     $IDS = implode(",", $items);
-                    $SQL = "UPDATE  `listview` SET  `list_active` =  '0' WHERE `list_id` IN($IDS) ";
+                    $SQL = "UPDATE  `listview` SET  `list_active` =  '0';";
+
                     $update = $db->query($SQL);
                     if ($update){
                         $response['success'] = true;
@@ -515,7 +536,7 @@ $app->group('/admin', function () use ($db,$app) {
                 if ($action == 'delete'){
                     // $active = $app->request->post("data");
                     // $IDS = implode(",", $items);
-                    $SQL_DELETE = "DELETE FROM `members` WHERE `id` = '$member_id';";
+                    $SQL_DELETE = "DELETE FROM `members` WHERE `user_id` = '$member_id';";
 
 
                     $delete = $db->query($SQL_DELETE);
@@ -533,7 +554,7 @@ $app->group('/admin', function () use ($db,$app) {
                     // $active = $app->request->post("data");
 
                    // $SQL_UPDATE = "UPDATE `members` SET `user_name` = '$member_username', `pass_word` = '$member_password' , `cellnumber` = '$member_mobile' WHERE `id` = '$member_id';";
-                    $SQL_UPDATE = "UPDATE `members` SET `user_name` = '$member_username', `pass_word` = '$member_password' ,`school_name` = '$school_name' WHERE `id` = '$member_id';";
+                    $SQL_UPDATE = "UPDATE `members` SET `user_name` = '$member_username', `pass_word` = '$member_password' ,`school_name` = '$school_name' WHERE `user_id` = '$member_id';";
 
                     $update = $db->query($SQL_UPDATE);
                     if ($update){
@@ -560,9 +581,6 @@ $app->group('/admin', function () use ($db,$app) {
         //echo $_GET['callback']."(".json_encode($response).")";
         returnResponse($response);
     });
-
-
-
 
     //------------------------------------------------- LOGIN-----------------------------------------------
     $app->post('/login', function () use($db,$app, $response) {
