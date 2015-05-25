@@ -1,57 +1,55 @@
 
 
-
+<div class="container-fluid sanctuary_container">
 
     <div class="container">
 
         <div class="page-header">
-            <h1>Sanctuary <small>Bootstrap template, demonstrating an example portfolio page layout</small></h1>
+            <h1>Sanctuary <small></small></h1>
         </div>
 
         <div class="page-header-menu">
             <div class="bs-example">
                 <ul class="nav nav-tabs" id="myTab">
-                    <li><a data-toggle="tab" href="#sectionA">BIRDS</a></li>
-                    <li><a data-toggle="tab" href="#sectionB">PLANTS</a></li>
-                    <li><a data-toggle="tab" href="#sectionC">INSERT</a></li>
+
 
                 </ul>
             </div>
     </div>
-
         <div class="container tab-content sanctuary_view ">
             <div class="  " style="display:none">
 
                 <div  id="template" class="col-lg-3 col-md-3 section_all">
-                    <div class="json_object_wrapper ">
-                        <div class="json_object_header">
-                            <h6 id="sound" class="fa fa-file-sound-o pull-right"></h6>
-                            <h3 id="name"></h3>
-                        </div>
-                        <a href="#">
-                            <img id="img_sanctuary" class="img-responsive section-images" alt="" src="" />
-                        </a>
-                    </div>
-                    <div class="">
-                        <div class="section-text-wrapper">
-                            <h4 id="cat"></h4>
-                            <h1 class="pull-right" id="points"></h1>
-                            <p id="description"></p>
-                            <div class="text-center">
-                                <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Vote Up</a>
-                                <a href="#"><span class="glyphicon glyphicon-thumbs-down"></span> Vote Down</a>
+                    <div class="json_object_wrapper">
+                        <div class="json_object_innerWrapper">
+                            <div class="json_object_header">
+                                <h3 class="pull-right" id="points"></h3>
+                                <h3 id="name"></h3>
+
                             </div>
+                            <div class="json_object_header_2">
+                                <h4 id="list_type" class="fa fa-circle pull-right"></h4>
+                                <h4 id="cat"></h4>
+                            </div>
+                            <a href="#">
+                                <img id="img_sanctuary" class="img-responsive section-images" alt="" src="" />
+                            </a>
+                            <p id="description_p"></p>
                         </div>
+
+
+
                     </div>
+
                     <div class="break_list"/>
                 </div>
 
-            </div>
+            </div> <!-- clone template end--->
         </div>
 
 
+    </div>
 </div>
-
 <script>
         $("document").ready(function(){
             var cat='all';
@@ -65,13 +63,17 @@
                         $.each(cat, function(index,items){
                             if (items.list_active == "0") return true;
                             var clone_template_plants = $("#template").clone();
+                            $(clone_template_plants).addClass(items.list_type);
                             $(clone_template_plants).addClass(items.list_cat);
                             $(clone_template_plants).attr('id',items.list_id + "_" + items.list_cat);
                             $("#cat", clone_template_plants).text(items.list_cat);
                             $("#name", clone_template_plants).text(items.list_name);
                             $("#points", clone_template_plants).text(items.list_points);
+                            $("#list_type", clone_template_plants).text(items.list_type);
                             $("#img_sanctuary", clone_template_plants).attr('src',$imagePath +items.list_img);
-                            $("#description", clone_template_plants).text(items.list_desc);
+                            $("#description_p", clone_template_plants).text(items.list_desc);
+
+
                             $(".tab-content").append(clone_template_plants);
                         })
                     }else{

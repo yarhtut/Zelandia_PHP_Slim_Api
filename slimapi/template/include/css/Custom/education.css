@@ -5,82 +5,259 @@
 
 }
 .nav-tabs{
-    background:rgba(34,34,34,1);
-    margin-top:-21px;
+    background:rgba(210,210,210,1);
+    margin-top:21px;
 }
-
+.sanctuary_container,body{
+    background:rgba(238,238,238,1);
+}
 .section-text-wrapper span{
     color:#Ed6726;
 }
-.section-text-wrapper p{
+#description_p {
     font-weight:400 !important;
-    color:#444;
+    color:#fefefe;
+
+    margin:auto;
+    width:95%;
+    margin-top:5px;
+    margin-bottom:15px;
 }
 .main_json_object h6{
     font-weight:400 !important;
     font-size:24px;
     color:#eee;
 }
-.main_json_object h3{
-    font-weight:300 !important;
-    color:#f26122;
+.json_object_header h3{
+    font-weight:500 !important;
+    color:#fff;
+    font-size:18px;
+    margin-top:2px;
     -webkit-transform:scale(1.0, 2.0);
     -moz-transform:scale(1.0, 2.0);
     -ms-transform:scale(1.0, 2.0);
     -o-transform:scale(1.0, 2.0);
     transform:scale(1.0, 2.0);
 }
-.main_json_object h1{
+.main_json_header h3{
     font-weight:300 !important;
-    color:#f26122;
-    font-size:24px;
+    color:#fff;
+    font-size:18px;
     -webkit-transform:scale(1.0, 2.0);
     -moz-transform:scale(1.0, 2.0);
     -ms-transform:scale(1.0, 2.0);
     -o-transform:scale(1.0, 2.0);
     transform:scale(1.0, 2.0);
+    padding-left:5px;
+    padding-right:5px;
 }
 .main_json_object{
     padding-top:30px;
     padding-bottom:10px;
 }
 .json_object_wrapper{
-    width:90%;
+    width:95%;
+    display:block;
+    height:auto;
+    position:relative;
+    padding:2%;
     margin:0px auto;
-
+    border-radius:8px;
+    border:2px solid #dedede;
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    -moz-box-shadow: 0 10px 6px -6px #777;
+    box-shadow: 0 10px 6px -6px #777;
+    background:#fff;
+    margin-top:15px;
+    margin-bottom:15px;
+}
+.birds .json_object_innerWrapper{
+    width:96%;
+    margin:5px auto;
+    min-height:350px;
+    border-radius:8px;
+    border:2px solid #aaa;
+    background:#f26122;
+}
+.insects .json_object_innerWrapper{
+    width:96%;
+    margin:5px auto;
+    min-height:350px;
+    border-radius:8px;
+    border:2px solid #aaa;
+    background:#FF4444;
+}
+.plants .json_object_innerWrapper{
+    width:96%;
+    margin:5px auto;
+    min-height:350px;
+    border-radius:8px;
+    border:2px solid #aaa;
+    background:#99CC00;
+}
+.mammals .json_object_innerWrapper{
+    width:96%;
+    margin:5px auto;
+    min-height:350px;
+    border-radius:8px;
+    border:2px solid #aaa;
+    background:#AA66CC;
+}
+.others .json_object_innerWrapper{
+    width:96%;
+    margin:5px auto;
+    min-height:350px;
+    border-radius:8px;
+    border:2px solid #aaa;
+    background:#33B5E5;
 }
 .json_object_header{
+    width:96%;
     height:40px;
-    background:#222;
+    margin:auto;
+    border-radius:8px 8px 0px 0px;
+
+    margin-top:10px;
+
+}
+.json_object_header_2 .fa{
+    font-size:18px;
+}
+.Critical .fa{
+    color:#330033;
+
+}
+.Endangered .fa{
+    color:#330033;
+
+}
+.Vulnerable .fa{
+    color:#990000;
+
+}
+
+.Declining .fa{
+     color:#FF9900;
+
+ }
+.Recovering .fa{
+    color:#FFcc33;
+
+}
+.Relict .fa{
+    color:#99cc66;
+
+}
+.Uncommon .fa{
+    color:#669933;
+
+}
+.Not_threatened .fa{
+    color:#669966;
+
+}
+.json_object_header_2{
+    width:98%;
+    height:40px;
+    margin:auto;
+    background:#eee;
+    border-radius:8px 8px 0px 0px;
+    border:3px solid #eee;
+    margin-top:-5px;
+}
+.json_object_header_2 h4{
+    padding-left:5px;
+    padding-right:5px;
 }
 .text-center a{
      color:black;
-
  }
 #myTab{
 
     border-radius:3px 3px 0px 0px;
 }
+#myTab_admin{
+
+    border-radius:3px 3px 0px 0px;
+}
+#navbarCollapse li a{
+    padding:20px;
+}
 #myTab li a{
-    color:#fff;
+    color:#121212;
     font-weight:400 !important;
-    text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
-    padding:8px 20px 8px 20px;
+    text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+    padding:10px 20px 8px 20px;
 
 }
-#myTab  li,a:hover{
-   / border:none!important;
+#myTab_admin li a{
 
+    font-weight:400 !important;
+    text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+
+
+}
+#myTab_admin li :hover{
+    color:#337ab7;
+    background:#ddd;
+
+}
+.nav-tabs > li.active > a{
+    background:rgba(180,180,180,1) !important;
+
+}
+
+#activity_tab li {
+    color:#fff;
+    font-weight:400 !important;
+    background:#337ab7;
+    border-radius:5px;
+    padding:10px 20px 8px 20px;
+    margin:3px;
+}
+#activity_tab li a{
+     color:#fff;
+
+
+     font-weight:400 !important;
+
+
+ }
+
+#myTab  li,a:hover{
+    border:none!important;
 }
 #myTab  .active > a{
     text-shadow: 1px 1px 1px rgba(120, 120, 120, 1);
     color:#fff;
+}
+#myTab_admin  li,a:hover{
+    border:none!important;
+}
 
+#myTab_admin  .active > a{
+    text-shadow: 1px 1px 1px rgba(120, 120, 120, 1);
+    color:#fff;
 }
 .section-images{
-    width:100%;
+    width:95%;
+    margin:auto;
     height:120px !important;
 }
 .tab-content{
     padding-bottom:50px;
+}
+
+#clone_activity_template:hover{
+    color:#337ab7 !important;
+    background:#ddd !important;
+    font-weight:400 !important;
+
+
+}
+#clone_activity_template a:hover{
+    color:#337ab7 !important;
+
+
+
 }

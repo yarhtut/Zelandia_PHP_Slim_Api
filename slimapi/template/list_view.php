@@ -113,7 +113,6 @@
             var list = {
                 items: items_active
             }
-
             $.ajax({
                 url: 'api/update/unactive',
                 method: 'POST',
@@ -121,14 +120,13 @@
                 dataType: 'jsonp',
                 success: function (response) {
                     alert("List de activation Success");
-                   // window.location.href = "admin";
+                   window.location.href = "admin";
                 }
             });
 
         });
         //-------------------------------------------------modal Add New list
         $(".list_btn_add_new").click(function (e) {
-
             var items_name = $('#form_name').val();
             var items_cat = $('#form_cat').val();
             var items_type = $("#form_type").val();

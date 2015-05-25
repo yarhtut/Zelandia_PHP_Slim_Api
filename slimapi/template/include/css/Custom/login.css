@@ -13,7 +13,7 @@
 }
 .login_form #sign_in{
     height:35px;
-  //  background:#Ed6726 !important;
+  //background:#Ed6726 !important;
 }
 .login_form h1{
     font-size:48px;
@@ -108,7 +108,7 @@ a{
 #members_panel{
 
     width:100%;
-    background:#ddd;
+
 }
 #dropdown1{
     position:absolute;
@@ -129,25 +129,24 @@ a{
 .list_template li{
     line-height:40px;
     text-align: center;
-    height:50px;
+    height:55px;
     color:#000;
     font-weight:300;
     border:1px solid #888;
     margin-top:3px;
 }
-.list_template li{
-    line-height:40px;
-    text-align: center;
-    height:50px;
-    color:#000;
-    font-weight:300;
-    border:1px solid #888;
-    margin-top:3px;
+
+#description {
+    line-height:13px !important;
+
+    text-align: left !important;
+
+
 }
 #template_header li{
-    line-height:10px;
+    line-height:12px;
     text-align: center;
-    height:50px;
+    height:55px;
     color:#000;
     font-weight:300;
     border:1px solid #888;

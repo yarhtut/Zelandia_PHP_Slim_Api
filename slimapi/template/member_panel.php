@@ -13,6 +13,7 @@
         <li class="col-lg-2" ><h3>NO/ID</h3></li>
         <li class="col-lg-3" > <h3>Username</h3></li>
         <li class="col-lg-3" > <h3>Password</h3></li>
+
         <li class="col-lg-2" ><h3>School Name</h3></li>
 
         <li class="col-lg-2" id=""><h3>Options</h3></li>
@@ -25,7 +26,9 @@
             <ul  class="nav list_template" id="template_members">
                 <li class="col-lg-2" id="members_id" ></li>
                 <li class="col-lg-3" id="username"></li>
+
                 <li class="col-lg-3" id="password"></li>
+                <li class="col-lg-2" id="schools_id" style="display:none;"></li>
                 <li class="col-lg-2" id="school_name"></li>
 
                 <li class="col-lg-2">
@@ -48,17 +51,16 @@
         var member_id = $('#members_form_id').val();
         var member_username= $('#members_username').val();
         var member_password=  $('#members_password').val();
-       // var member_mobile = $('#members_mobile').val();
-        var school_name = $('#members_school_name').val();
+        var schools_id = $('#members_schools_id').val();
         //jquery to update our list
         var member_add_new = {
             member_id:member_id,
             member_username:member_username,
             member_password:member_password,
-            school_name:school_name
+            schools_id:schools_id
 
         }
-        //console.log("final save",items_active)
+
         //ajax push to api
         $.ajax({
             url : 'api/memberUpdate/addNewMember',
@@ -93,62 +95,10 @@
                 window.location.href = "admin";
             }
         });
-
     })
 
-    //-------------------------------------------------get json object and set into clone template button-----------------
-    var type = '0';
-    $.ajax({
-        url : 'api/members/'+type,
-        dataType : 'jsonp',
-        success : function(response){
-            //clone our template
-            if (response.success == true){
-                var type = response.data;
-                // console.log("cat",response.data)
-                $.each(type, function(index,items){
-                    var clone_template = $("#template_members").clone();
-                    $(clone_template).attr('id',"members_id_"+items.user_id);
-                    $("#members_id", clone_template).text(items.user_id);
-                    $("#username", clone_template).text(items.user_name);
-                    $("#password", clone_template).text(items.pass_word);
-                    $("#school_name", clone_template).text(items.school_name);
-                    $("#type_admin", clone_template).text(items.type_admin);
-                    $(".btn_members_option", clone_template).attr('members_id_add',+ items.user_id);
-                    $(".tab_content_members").append(clone_template);
-                })
-
-                $('.btn_members_option').on('click',function(){
 
 
-                    $(".members_btn_add_new").hide();
-                    $('.members_btn_delete').show();
-                    $('.members_btn_update').show();
-                    //$("#members_form_id").prop('disabled', true);
-                    var btn_option_id =  $(this).attr("members_id_add");
-                    console.log('members_id_'+btn_option_id);
-                    var theDiv = $('#members_id_'+btn_option_id);
-                    var members_id = $( "#members_id",theDiv).text();
-                    var members_name = $( "#username",theDiv).text();
-                    var members_password = $('#password', theDiv).text();
-                    var school_name = $( "#school_name",theDiv).text();
-                    var type_admin = $( "#type_admin",theDiv).text();
-
-                    $('#members_form_id').val(members_id);
-                    $('#members_username').val(members_name);
-                    $('#members_password').val(members_password);
-                    $('#members_school_name').val(school_name);
-                    $('#type_admin').val(type_admin);
-
-
-                })
-
-            }else{
-                //alert("login failed" + response.data)
-            }
-            //  console.log("response",response)
-        }
-    });
 
 
 </script>
