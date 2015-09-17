@@ -1,14 +1,24 @@
 # Zelandia_PHP_Slim_Api
 
-
-This project is to adopt the Zealandia School activities which currently used in paper type to Android App, simple RESTful Api and Web admin using PHP Slim framework, JQuery(AJAX), bootstrap ( but did not really have time to look pretty).
-
-This project has done by Yar Thet Pan Kyaw Htut(Developer) and Leon Ngatai (BA).
+##Team
+Yar Thet Pan Kyaw Htut(Developer) and Leon Ngatai (BA).                       --Academic supervisor: Dr Brenda Lloyd
 
 Total 16 weeks long project but actual coding part was only 11 weeks.
 
+#Background
 
-#How is Work
+
+The Zealandia Sanctuary is home to New Zealand's most incredible and rare wildlife. For the childeren that visit there it provides a living classroom where they are able to observe and interact with the large number of birds, reptiles and plants that exist there.
+
+##Objective
+
+To adopt Zealandia School activities which currently used in paper type to Android App, simple RESTful Api and Web admin using PHP Slim framework, JQuery(AJAX), bootstrap.
+
+##Outcome
+-An administration website for maintaining wildlife content on the database and for setting up users with logins.​
+-An Android application for school children to use on their visits to Zealandia to record sightings of the various wildlife at the sanctuary.​
+-A REST API for data synchronisation between the Android mobile devices and the webserver.
+
 
 
 
@@ -17,6 +27,6 @@ Total 16 weeks long project but actual coding part was only 11 weeks.
 
 #Admin Panel
 
-Admin can add new list, update, delete (CRUD) all with JQuery Ajax.
+Admin can add new, update, delete (CRUD) all with JQuery Ajax. 
 
 <img src="http://i.imgur.com/yGBPSAx.png">
