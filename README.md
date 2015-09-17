@@ -15,9 +15,9 @@ The Zealandia Sanctuary is home to New Zealand's most incredible and rare wildli
 To adopt Zealandia School activities which currently used in paper type to Android App, simple RESTful Api and Web admin using PHP Slim framework, JQuery(AJAX), bootstrap.
 
 ##Outcome
--An administration website for maintaining wildlife content on the database and for setting up users with logins.​
--An Android application for school children to use on their visits to Zealandia to record sightings of the various wildlife at the sanctuary.​
--A REST API for data synchronisation between the Android mobile devices and the webserver.
+-  An administration website for maintaining wildlife content on the database and for setting up users with logins.​
+-  An Android application for school children to use on their visits to Zealandia to record sightings of the various wildlife at the sanctuary.​
+-   A REST API for data synchronisation between the Android mobile devices and the webserver.
 
 
 
