@@ -1,9 +1,13 @@
 # Zelandia_PHP_Slim_Api
 
 ##Team
-Yar Thet Pan Kyaw Htut(Developer) and Leon Ngatai (BA).                       --Academic supervisor: Dr Brenda Lloyd
+Yar Thet Pan Kyaw Htut(Developer) and Leon Ngatai (BA).
 
 Total 16 weeks long project but actual coding part was only 11 weeks.
+
+This projects had been given to Whitireia for 3 semesters but Yar Htut and Leon Ngatai did not used any of the previous code or design and they had completed the project.
+
+Android App and Web Api had need to do a little bit more work for production.
 
 #Background
 
@@ -30,3 +34,17 @@ To adopt Zealandia School activities which currently used in paper type to Andro
 Admin can add new , update, delete (CRUD) for all categories,students and schools.
 
 <img src="http://i.imgur.com/yGBPSAx.png">
+
+
+#Important Notes
+##PHP
+
+Currently rewriting the API with auto generation key using PHP Phalcon Framwork because Zealandia would like to use the Android App and Web Admin.
+Some fixes of Css for mobile and tablet view ( responsive overwrite css)
+will include Minified CSS and JS fixtures which provided by Phalcon Framwrok.
+
+
+##Android
+
+-   need to comment it out all the debug message (toast)
+-   Notification fixes fo RADIUS wifi connection.
