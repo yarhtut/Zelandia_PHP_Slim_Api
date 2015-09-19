@@ -49,4 +49,4 @@ will include Minified CSS and JS fixtures which provided by Phalcon Framwrok.
 ##Android
 
 -   need to comment it out all the debug message (toast)
--   Notification fixes fo RADIUS wifi connection.
+-   Notification fixes for RADIUS wifi connection.
