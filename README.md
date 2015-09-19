@@ -31,9 +31,11 @@ To adopt Zealandia School activities which currently used in paper type to Andro
 
 #Admin Panel
 
-Admin can add new , update, delete (CRUD) for all categories,students and schools.
+Admin can add new , update, delete (CRUD) for all categories,students and schools.(All with Ajax)
 
 <img src="http://i.imgur.com/yGBPSAx.png">
+
+<img src="http://i.imgur.com/qRQ3z3P.png">
 
 
 #Important Notes
