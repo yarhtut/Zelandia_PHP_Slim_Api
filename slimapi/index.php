@@ -50,16 +50,17 @@ $app->get('/Sanctuary', function () use($app) {
 
 
 });
+
 $app->get('/education', function () use($app) {
 
     $app->render('include/top-menu.php');
     $app->render('include/top_navbar.php');
     $app->render('include/script.php');
-    //render main home page
     $app->render('education.php');
 
 
 });
+
 // render the Sanctuary php page
 $app->get('/Sanctuary', function () use($app) {
 
@@ -71,7 +72,6 @@ $app->get('/Sanctuary', function () use($app) {
 
 
 });
-
 
 //Admin logon Page
 $app->group('/admin', function () use ($db,$app) {
@@ -111,10 +111,11 @@ $app->group('/admin', function () use ($db,$app) {
     });
 
 })
-    /*------------------------------------API invoke--------------------*/
+
+/*------------------------------------API invoke--------------------*/
 ;$app->group('/api', function () use ($db,$app) {
 
-      //API admin controller
+    //API admin controller
     //------------------------------------------lIST VIEW FOR SANCTUARY
     //define our response back to ajax
     $response['success'] = false;
@@ -134,7 +135,7 @@ $app->group('/admin', function () use ($db,$app) {
         $user = (isset($user[0])) ? $user[0] : $user;
 
 
-        //SQL statement  this will check username & password exist
+        //SQL statement this will check username & password exist
         $SQL_STATEMENT = "INSERT INTO school_activity(`id`, `user_id`, `cat_id`, `clicked`) VALUES(null,(SELECT id FROM members WHERE user_name = '{$user->email}' AND pass_word = '{$user->password}'),?,?);";
 
 
