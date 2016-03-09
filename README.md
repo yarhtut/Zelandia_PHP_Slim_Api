@@ -23,6 +23,49 @@ To adopt Zealandia School activities which currently used in paper type to Andro
 -  An Android application for school children to use on their visits to Zealandia to record sightings of the various wildlife at the sanctuary.​
 -   A REST API for data synchronisation between the Android mobile devices and the webserver.
 
+Zelandia API
+===================
+This readme will act as temporary documentation for the Zealandia API.
+
+ Calls For Items
+===================
+
+----------
+
+
+All Items
+---------
+
+This call will return all items (animals) that are in the database, this will be used for the admin section. 
+
+> **Example:** http://yar.cloudns.org/SlimApi/api/list/birds
+
+
+All Items - Active
+---------
+ 
+This will return all items (animals) that are active, from the database and ignore all inactive items. This will be used for the mobile app to ensure inactive items are not displayed.
+
+> **Example:** http://yar.cloudns.org/SlimApi/api/list/active
+
+Insert New Item
+---------
+
+This will insert a new item into the database, I have only tested with curl.
+
+> **Example:** curl -i -X POST -d '{"item_id":12345,"item_category":"test insert","item_name": "test insert","item_type":"dead","item_image_file": "filegone","item_description": "dead and gone","item_points":12,"item_active":0}'http://yar.cloudns.org/SlimApi/api/update/:action
+
+ Calls For Schools
+===================
+
+
+All Schools
+---------
+
+This call will return all schools from the schools table.
+
+> **Example:** http://yar.cloudns.org/SlimApi/api/schools
+
 
 
 
@@ -46,7 +89,3 @@ Some fixes of Css for mobile and tablet view ( responsive overwrite css)
 will include Minified CSS and JS fixtures which provided by Phalcon Framwrok.
 
 
-##Android
-
--   need to comment it out all the debug message (toast)
--   Notification fixes for RADIUS wifi connection.
