@@ -134,7 +134,7 @@ $app->group('/admin', function () use ($db,$app) {
         $user = (isset($user[0])) ? $user[0] : $user;
 
 
-        //our 1 line SQL statement PLEASE YAR NO BREAK this will check username & password exist
+        //SQL statement  this will check username & password exist
         $SQL_STATEMENT = "INSERT INTO school_activity(`id`, `user_id`, `cat_id`, `clicked`) VALUES(null,(SELECT id FROM members WHERE user_name = '{$user->email}' AND pass_word = '{$user->password}'),?,?);";
 
 
@@ -142,7 +142,7 @@ $app->group('/admin', function () use ($db,$app) {
 
         foreach($data as $key => $value)
         {
-            //as we are bashing the dbase always use a prepare statment i will teach you yar...
+            //as we are bashing the dbase always use a prepare statment 
             $stmt->bind_param("ii",$value->catId,$value->CLICKED);
 
             if ($stmt->execute()) {
