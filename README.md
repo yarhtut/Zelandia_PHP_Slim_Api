@@ -46,7 +46,7 @@ All Items - Active
  
 This will return all items (animals) that are active, from the database and ignore all inactive items. This will be used for the mobile app to ensure inactive items are not displayed.
 
-> **Example:** http://yar.cloudns.org/SlimApi/api/list/active
+> **Example:** http://yar.cloudns.org/SlimApi/api/list/birds/active=1
 
 Insert New Item
 ---------
